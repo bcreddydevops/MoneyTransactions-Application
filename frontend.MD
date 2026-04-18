@@ -138,6 +138,8 @@ curl http://<BACKEND-IP>:8080/transactions
 Test Through Nginx
 ```
 curl http://localhost/api/transactions
+curl http://localhost:8080/transactions
+curl -X DELETE http://localhost:8080/transactions/1
 ```
 
 
