@@ -16,10 +16,15 @@
 3306 → Backend SG only
 
 
-From backend server
+Test From backend server 
 ```
 telnet <DB-IP> 3306
 nc -zv <DB-IP> 3306
 ```
 
+## Load Balancer (AWS ALB) ##
+Create Target Group → Frontend EC2
+Listener → HTTP (80)
+Health Check → /
+Attach frontend instance
 
