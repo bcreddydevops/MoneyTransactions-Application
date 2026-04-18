@@ -34,6 +34,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// DB Connection
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: "root",
@@ -46,31 +47,64 @@ db.connect((err) => {
     console.error("DB Connection Failed:", err);
     process.exit(1);
   }
-  console.log("Connected to DB");
+  console.log("✅ Connected to DB");
 });
 
+
+// ================== GET ==================
 app.get("/transactions", (req, res) => {
   db.query("SELECT * FROM transactions", (err, result) => {
-    if (err) return res.send(err);
+    if (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
     res.send(result);
   });
 });
 
+
+// ================== POST ==================
 app.post("/transactions", (req, res) => {
   const { title, amount, type } = req.body;
+
   db.query(
     "INSERT INTO transactions (title, amount, type) VALUES (?, ?, ?)",
     [title, amount, type],
     (err, result) => {
-      if (err) return res.send(err);
-      res.send(result);
+      if (err) {
+        console.error(err);
+        return res.status(500).send(err);
+      }
+      res.send({ message: "Transaction added successfully" });
     }
   );
 });
 
-app.listen(8080, "0.0.0.0", () => {
-  console.log("Server running on port 8080");
+
+// ================== DELETE ==================
+app.delete("/transactions/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.query("DELETE FROM transactions WHERE id = ?", [id], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).send({ message: "Transaction not found" });
+    }
+
+    res.send({ message: "Transaction deleted successfully" });
+  });
 });
+
+
+// ================== SERVER ==================
+app.listen(8080, "0.0.0.0", () => {
+  console.log("🚀 Server running on port 8080");
+});
+
 ```
 
 ## Create Systemd Service
@@ -125,3 +159,17 @@ show databases;
 If not → security group issue (very common)
 DB Server SG ->Allow 3306 from Backend EC2 SG
 Backend SG ->Should be allowed to connect to DB
+
+
+## Check the Real Error Logs ##
+```
+journalctl -u backend -n 50 --no-pager
+```
+
+```
+If you make any changes in your code do 
+```
+systemctl daemon-reload
+systemctl restart backend
+systemctl status backend
+```
