@@ -41,23 +41,130 @@ vim /usr/share/nginx/html/index.html
 
 ```
 <!DOCTYPE html>
+<meta charset="UTF-8">
 <html>
 <head>
   <title>Money Transactions</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      text-align: center;
+      color: white;
+    }
+
+    /* Big Branding */
+    .brand {
+      font-size: 50px;
+      font-weight: bold;
+      color: #00ffcc;
+      text-shadow: 2px 2px 8px black;
+      margin-top: 20px;
+    }
+
+    .app-title {
+      font-size: 30px;
+      color: yellow;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      background: white;
+      color: black;
+      width: 50%;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px black;
+    }
+
+    input, select {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    /* Add Button */
+    .add-btn {
+      background: green;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add-btn:hover {
+      background: darkgreen;
+    }
+
+    /* Delete Button */
+    .delete-btn {
+      background: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background: darkred;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #f2f2f2;
+      margin: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      color: black;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .credit {
+      color: green;
+      font-weight: bold;
+    }
+
+    .debit {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Money Transactions</h1>
 
-  <input id="title" placeholder="Title">
-  <input id="amount" placeholder="Amount">
-  <select id="type">
-    <option value="credit">Credit</option>
-    <option value="debit">Debit</option>
-  </select>
-  <button onclick="addTransaction()">Add</button>
+  <!-- Branding -->
+  <div class="brand">🚀 BCReddy DevOps 🚀</div>
+  <div class="app-title">💰 Money Transactions App</div>
 
-  <h2>Transactions</h2>
-  <ul id="list"></ul>
+  <div class="container">
+
+    <input id="title" placeholder="Title">
+    <input id="amount" placeholder="Amount">
+    <select id="type">
+      <option value="credit">Credit</option>
+      <option value="debit">Debit</option>
+    </select>
+
+    <br><br>
+    <button class="add-btn" onclick="addTransaction()">➕ Add Transaction</button>
+
+    <h2>📊 Transactions</h2>
+    <ul id="list"></ul>
+
+  </div>
 
 <script>
 const API = "/api";
@@ -68,11 +175,15 @@ function load() {
     .then(data => {
       let list = document.getElementById("list");
       list.innerHTML = "";
+
       data.forEach(t => {
         list.innerHTML += `
           <li>
-            ${t.title} - ${t.amount} (${t.type})
-            <button onclick="del(${t.id})">Delete</button>
+            <span>
+              ${t.title} - ${t.amount}
+              <span class="${t.type}">(${t.type})</span>
+            </span>
+            <button class="delete-btn" onclick="del(${t.id})">❌ Delete</button>
           </li>`;
       });
     });
@@ -98,8 +209,10 @@ function del(id) {
 
 load();
 </script>
+
 </body>
 </html>
+
 ```
 
 ## Nginx Reverse Proxy Config ##
