@@ -103,3 +103,9 @@ systemctl daemon-reload
 systemctl enable backend
 systemctl start backend
 ```
+
+## Next Step (Important)
+
+Security Group Rules
+DB Server SG -Allow 3306 from Backend EC2 SG
+Backend SG-Should be allowed to connect to DB
