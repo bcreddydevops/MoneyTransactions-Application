@@ -125,9 +125,19 @@ location /health {
 systemctl restart nginx
 ```
 
-## Check from the browser##
+## Check from the browser ##
 ```
 http://<nginx-public-ip>:80
+```
+
+From frontend server:
+```
+curl http://<BACKEND-IP>:8080/transactions
+```
+
+Test Through Nginx
+```
+curl http://localhost/api/transactions
 ```
 
 
