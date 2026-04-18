@@ -41,6 +41,10 @@ CREATE TABLE transactions (
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'MoneyAPP@1';
 FLUSH PRIVILEGES;
 ```
+Now verify user 
+```
+SELECT host, user FROM mysql.user;
+```
 
 Now check the databases using below commands and select the table 
 
@@ -71,4 +75,7 @@ now check:
 select * from transactions;
 ```
 
-
+## Restart DB ##
+```
+systemctl restart mariadb
+```
