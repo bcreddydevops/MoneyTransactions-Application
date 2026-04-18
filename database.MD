@@ -14,3 +14,20 @@ just enter by default and it will ask new password give your password what ever 
 ```
 MoneyAPP@1
 ```
+##Verification 
+```
+[root@ip ~]# mysql -u root -pMoneyAPP@1
+```
+##Create Database & Table
+```
+CREATE DATABASE money_app;
+USE money_app;
+
+CREATE TABLE transactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100),
+    amount DECIMAL(10,2),
+    type VARCHAR(10),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
