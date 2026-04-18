@@ -14,11 +14,11 @@ just enter by default and it will ask new password give your password what ever 
 ```
 MoneyAPP@1
 ```
-##Verification 
+# Verification 
 ```
 [root@ip ~]# mysql -u root -pMoneyAPP@1
 ```
-##Create Database & Table
+# Create Database & Table
 ```
 CREATE DATABASE money_app;
 USE money_app;
