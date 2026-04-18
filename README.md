@@ -23,8 +23,8 @@ nc -zv <DB-IP> 3306
 ```
 
 ## Load Balancer (AWS ALB) ##
-Create Target Group → Frontend EC2
-Listener → HTTP (80)
-Health Check → /
+Create Target Group → Frontend EC2 ,
+Listener → HTTP (80) ,
+Health Check → / ,
 Attach frontend instance
 
