@@ -214,6 +214,10 @@ load();
 </html>
 
 ```
+## If you make any code changes you need restart nginx"
+```
+ systemctl restart nginx
+```
 
 ## Nginx Reverse Proxy Config ##
 
