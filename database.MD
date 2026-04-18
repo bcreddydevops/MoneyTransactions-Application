@@ -15,10 +15,13 @@ just enter by default and it will ask new password give your password what ever 
 MoneyAPP@1
 ```
 # Verification 
+
 ```
 [root@ip ~]# mysql -u root -pMoneyAPP@1
 ```
+
 # Create Database & Table
+
 ```
 CREATE DATABASE money_app;
 USE money_app;
@@ -31,3 +34,41 @@ CREATE TABLE transactions (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
+
+## Allow Remote Access (IMPORTANT)
+
+```
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'MoneyAPP@1';
+FLUSH PRIVILEGES;
+```
+
+Now check the databases using below commands and select the table 
+
+```
+show databases;
+```
+
+select table and check the transactions 
+
+```
+use money_app;
+```
+
+```
+select * from transactions;
+```
+
+Insert one record manually
+
+```
+INSERT INTO transactions (title, amount, type)
+VALUES ('Salary', 50000, 'credit');
+```
+
+now check:
+
+```
+select * from transactions;
+```
+
+
