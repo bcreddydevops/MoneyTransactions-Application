@@ -1,2 +1,3 @@
 # MoneyTransactions-Application
-curl http://localhost/api/transactions
+
+## User → Load Balancer → Nginx (Frontend) → Node.js (Backend) → MariaDB (Database) ##
