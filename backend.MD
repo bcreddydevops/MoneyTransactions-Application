@@ -106,6 +106,22 @@ systemctl start backend
 
 ## Next Step (Important)
 
-Security Group Rules
-DB Server SG -Allow 3306 from Backend EC2 SG
-Backend SG-Should be allowed to connect to DB
+Now your DB is ready — you need to connect it to backend.
+
+```
+dnf install mariadb105-server -y
+```
+
+Verify from Backend Server
+
+```
+mysql -h <DBEC2-Private-IP> -u root -pMoneyAPP@1
+```
+If login works → connection is good
+```
+show databases;
+```
+
+If not → security group issue (very common)
+DB Server SG ->Allow 3306 from Backend EC2 SG
+Backend SG ->Should be allowed to connect to DB
