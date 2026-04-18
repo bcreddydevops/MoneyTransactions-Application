@@ -14,3 +14,12 @@
 
 ## DB SG ##
 3306 → Backend SG only
+
+
+From backend server
+```
+telnet <DB-IP> 3306
+nc -zv <DB-IP> 3306
+```
+
+
